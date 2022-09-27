@@ -278,9 +278,9 @@ class _BoomMenuState extends State<BoomMenu> with SingleTickerProviderStateMixin
     ];
 
     return Stack(
+      clipBehavior: Clip.none,
       alignment: Alignment.bottomRight,
       fit: StackFit.expand,
-      overflow: Overflow.visible,
       children: children,
     );
   }
