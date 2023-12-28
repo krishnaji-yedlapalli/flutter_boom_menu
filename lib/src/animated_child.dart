@@ -1,22 +1,22 @@
 import 'package:flutter/material.dart';
 
 class AnimatedChild extends AnimatedWidget {
-  final int index;
-  final Color backgroundColor;
-  final double elevation;
-  final Widget child;
+  final int? index;
+  final Color? backgroundColor;
+  final double? elevation;
+  final Widget? child;
 
   final bool visible;
-  final VoidCallback onTap;
+  final VoidCallback? onTap;
   final VoidCallback toggleChildren;
-  final String title;
-  final String subtitle;
-  final Color titleColor;
-  final Color subTitleColor;
+  final String? title;
+  final String? subtitle;
+  final Color? titleColor;
+  final Color? subTitleColor;
 
   AnimatedChild({
-    Key key,
-    Animation<double> animation,
+    Key? key,
+    required Animation<double> animation,
     this.index,
     this.backgroundColor,
     this.elevation = 6.0,
@@ -25,18 +25,18 @@ class AnimatedChild extends AnimatedWidget {
     this.subtitle,
     this.visible = false,
     this.onTap,
-    this.toggleChildren,
+    required this.toggleChildren,
     this.titleColor,
     this.subTitleColor
   }) : super(key: key, listenable: animation);
 
   void _performAction() {
-    if (onTap != null) onTap();
+    if (onTap != null) onTap!();
     toggleChildren();
   }
 
   Widget build(BuildContext context) {
-    final Animation<double> animation = listenable;
+    final Animation<double> animation = listenable as Animation<double>;
 
     final Widget buttonChild = animation.value > 50.0
         ? Container(
@@ -56,13 +56,13 @@ class AnimatedChild extends AnimatedWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
                       Text(
-                        title,
+                        title ?? '',
                         overflow: TextOverflow.ellipsis,
                         style: TextStyle(color: (titleColor == null) ? Colors.black : titleColor, fontSize: 16.0),
                       ),
                       SizedBox(height: 3.0),
                       Text(
-                        subtitle,
+                        subtitle ?? '',
                         overflow: TextOverflow.ellipsis,
                         style: TextStyle(color: (subTitleColor == null) ? Colors.black : subTitleColor, fontSize: 12.0),
                       )
